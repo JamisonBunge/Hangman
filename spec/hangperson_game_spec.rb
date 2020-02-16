@@ -103,6 +103,16 @@ describe HangpersonGame do
       end
     end
   end
+  describe 'game status' do
+    before :each do
+      @game = HangpersonGame.new('banana')
+    end
+    it 'should be win when all letters guessed but with mult letters' do
+      guess_several_letters(@game, 'banna')
+      expect(@game.check_win_or_lose).to eq(:win)
+    end
+  end
+
 
   describe 'game status' do
     before :each do
@@ -112,6 +122,7 @@ describe HangpersonGame do
       guess_several_letters(@game, 'ogd')
       expect(@game.check_win_or_lose).to eq(:win)
     end
+
     it 'should be lose after 7 incorrect guesses' do
       guess_several_letters(@game, 'tuvwxyz')
       expect(@game.check_win_or_lose).to eq(:lose)
