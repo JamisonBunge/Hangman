@@ -7,10 +7,17 @@ class HangpersonGame
 
   # def initialize()
   # end
-  
+
   def initialize(word)
     @word = word
+    @guesses = ''
+    @wrong_guesses = ''
   end
+
+  attr_accessor :word
+  attr_accessor :guesses
+  attr_accessor :wrong_guesses
+
 
   # You can test it by running $ bundle exec irb -I. -r app.rb
   # And then in the irb: irb(main):001:0> HangpersonGame.get_random_word
@@ -24,4 +31,53 @@ class HangpersonGame
     }
   end
 
+  def word_with_guesses
+    resp = ''
+    @word.each_char do |x|
+      if @guesses.include? x
+        resp += x
+      else
+        resp += '-'
+      end
+    end
+    resp
+  end
+
+  def check_win_or_lose
+    if @word.chars.sort.join == @guesses.chars.sort.join
+      return :win
+    elsif @guesses.length + @wrong_guesses.length > 6
+      return :lose
+    else
+      return :play
+    end
+  end
+
+
+  def guess(val)
+    res = true
+    raise ArgumentError unless val =~ /[A-Za-z]/
+    val.downcase!
+
+    if @word.include? val
+
+      unless @guesses.include? val
+        @guesses +=val
+        res = true
+      else
+        res = false
+      end
+
+    elsif
+
+      unless @wrong_guesses.include? val
+        @wrong_guesses +=val
+        res = true
+      else
+        res = false
+      end
+
+    end
+    res
+  end
 end
