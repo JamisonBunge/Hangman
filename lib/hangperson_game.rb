@@ -45,7 +45,9 @@ class HangpersonGame
 
   def check_win_or_lose
 
-    if @word == '' return :play
+    if @word == ''
+      return :play
+    end
 
     if @word.chars.sort.uniq.join == @guesses.chars.sort.uniq.join
       return :win
