@@ -51,7 +51,7 @@ class HangpersonGame
 
     if @word.chars.sort.uniq.join == @guesses.chars.sort.uniq.join
       return :win
-    elsif @guesses.length + @wrong_guesses.length > 6
+    elsif @wrong_guesses.length > 6
       return :lose
     else
       return :play
